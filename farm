@@ -390,6 +390,12 @@ while true do
                         t.placeDown()
                         t.select(1)
                     end    
+                elseif meta.name == "minecraft:melon_block" then
+                    t.digDown()
+                    sortInv()
+                elseif meta.name == "minecraft:pumpkin" then
+                    t.digDown()
+                    sortInv()
                 end
             end
             t.forward()
