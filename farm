@@ -14,16 +14,18 @@ local function log(str)
         f.writeLine(str)
         f.close()
     end
+    print(str)
     local curX,curY = term.getCursorPos()
     term.setCursorPos(1,1)
     write(string.rep(" ",w))
     term.setCursorPos(1,1)
     local percent = (turtle.getFuelLevel()/turtle.getFuelLimit())*100
     write("Gardener Turtle OS | Fuel: "..tostring(math.floor(percent)).."%")
+    term.setCursorPos(1,2)
+    write(string.rep("-",w))
     term.setCursorPos(curX,curY)
-    write(str)
-    term.setCursorPos(curX,curY+1)
 end
+term.setCursorPos(1,3)
 
 -- Saving Data
 
