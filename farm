@@ -3,7 +3,7 @@
 local logFile = false
 local sizeX = 9
 local sizeY = 9
-local waitTime = 240
+local waitTime = 600
 
 -- Logging Function
 
