@@ -1,0 +1,66 @@
+-- Toolkit Loader
+
+local url = "http://raw.github.com/jakemroman/toolKit/master/"
+local program = string.lower(os.getComputerLabel())
+
+-- Init
+
+if not fs.isDir("/.archive") then
+  fs.makeDir("/.archive")
+end
+if not program then
+  program = "none"
+end
+local w,h = term.getSize()
+term.setBackgroundColor(colors.black)
+term.clear()
+term.setCursorPos(1,1)
+term.setTextColor(colors.white)
+print("Toolkit OS")
+print(string.rep("-"),w)
+print("Program: "..os.getComputerLabel()
+print("URL: "..url)
+print(string.rep("-"),w)
+write("Downloading program... ")
+
+-- Download
+
+local stream = http.get(url .. program)
+if stream then
+  print("Done!")
+  f = fs.open("/.archive/"..program,"w")
+  f.writeLine(stream.readAll())
+  f.close()
+elseif fs.exists("/.archive"..program) then
+  print("Failed")
+  print("Archived version detected, loading...")
+else
+  print("Failed")
+  print("Unknown program!")
+  return
+end
+
+-- Execute
+
+print("Press any key to cancel execution")
+write("Executing program in ")
+local xPos,yPos = term.getCursorPos()
+for i=3,0,-1 do
+  term.setCursorPos(xPos,yPos)
+  write(tostring(i).."s")
+  local tmr = os.startTimer(1)
+  while true do
+    local evt,key = os.pullEvent()
+    if evt == "timer" and key == tmr then
+      break
+    elseif evt == "key" then
+      term.setCursorPos(1,yPos+1)
+      print("Execution cancelled.")
+      return
+    end
+  end
+end
+
+term.clear()
+term.setCursorPos(1,1)
+shell.run("/.archive/"..program)
