@@ -1,6 +1,6 @@
 -- Toolkit Loader
 
-local url = "http://raw.github.com/jakemroman/toolKit/master/"
+local url = "https://raw.githubusercontent.com/jakemroman/toolKit/master/"
 local program = string.lower(os.getComputerLabel())
 
 -- Init
